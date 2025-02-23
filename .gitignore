@@ -1,0 +1,17 @@
+# Ignorowanie plików danych i wyników
+data/raw/
+data/processed/
+data/results/
+
+# Ignorowanie środowiska wirtualnego
+venv/
+*.pyc
+__pycache__/
+
+# Ignorowanie logów i konfiguracji
+logs/
+*.log
+config.yaml
+
+# Ignorowanie plików Jupyter Notebooka
+.ipynb_checkpoints/
