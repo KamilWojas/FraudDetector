@@ -48,3 +48,5 @@ FraudDetector/
 ├── .gitignore          #  Plik ignorowania w Git (np. pliki danych, logi)
 ├── requirements.txt    #  Lista zależności do instalacji
 ├── setup.py            #  Skrypt do pakowania projektu
+
+
