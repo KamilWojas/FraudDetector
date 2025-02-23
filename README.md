@@ -13,4 +13,5 @@ System do wykrywania oszustw finansowych oparty na Machine Learning i AI. Projek
 - **Deployment:** Docker, Google Cloud  
 
 
+
  Struktura projektu
