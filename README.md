@@ -50,3 +50,4 @@ FraudDetector/
 ├── setup.py            #  Skrypt do pakowania projektu
 
 
+
