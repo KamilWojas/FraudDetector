@@ -15,3 +15,4 @@ config.yaml
 
 # Ignorowanie plików Jupyter Notebooka
 .ipynb_checkpoints/
+
