@@ -1,7 +1,6 @@
 import pandas as pd
 
-# Ścieżka do danych
-DATA_PATH = "../data/raw/creditcard.csv"
+DATA_PATH = "../data/raw/creditcard.csv"  # Sprawdź tę ścieżkę
 
 def load_data():
     """Wczytuje dane z pliku CSV."""
@@ -12,4 +11,5 @@ def load_data():
 if __name__ == "__main__":
     df = load_data()
     print(df.head())
+
 
