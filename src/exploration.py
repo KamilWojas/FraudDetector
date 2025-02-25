@@ -53,3 +53,4 @@ def explore_data(df):
 if __name__ == "__main__":
     df = load_data()
     explore_data(df)
+
