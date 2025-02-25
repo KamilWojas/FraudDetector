@@ -75,6 +75,7 @@ def explore_data(df):
         analyze_fraud_ratio(df)
 
 
+
 if __name__ == "__main__":
     df = load_data()
     explore_data(df)
