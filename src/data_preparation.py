@@ -40,3 +40,4 @@ def preprocess_data(df):
 if __name__ == "__main__":
     df = load_data()
     X_train, X_test, y_train, y_test = preprocess_data(df)
+
