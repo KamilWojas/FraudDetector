@@ -50,6 +50,31 @@ def explore_data(df):
     plt.title("Macierz korelacji cech")
     plt.show()
 
+    def analyze_fraud_ratio(df):
+        """Sprawdza liczbę fraudów i normalnych transakcji."""
+        fraud_count = df["Class"].value_counts()
+        total = len(df)
+
+        print("\n📊 Liczba transakcji w każdej klasie:")
+        print(fraud_count)
+
+        fraud_ratio = fraud_count[1] / total * 100
+        print(f"\n⚠️ Oszukańcze transakcje stanowią tylko {fraud_ratio:.4f}% wszystkich transakcji!")
+
+        # Wizualizacja rozkładu
+        plt.figure(figsize=(6, 4))
+        sns.barplot(x=fraud_count.index, y=fraud_count.values, palette="coolwarm")
+        plt.title("Liczba transakcji fraudowych (1) vs. uczciwych (0)")
+        plt.xlabel("Klasa")
+        plt.ylabel("Liczba transakcji")
+        plt.show()
+
+    if __name__ == "__main__":
+        df = load_data()
+        explore_data(df)
+        analyze_fraud_ratio(df)
+
+
 if __name__ == "__main__":
     df = load_data()
     explore_data(df)
