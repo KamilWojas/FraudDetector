@@ -31,3 +31,4 @@ os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
 joblib.dump(model, MODEL_PATH)
 print(f"✅ Model zapisany jako {MODEL_PATH}")
 
+
