@@ -30,3 +30,4 @@ MODEL_PATH = os.path.join(os.path.dirname(__file__), "../models/random_forest.pk
 os.makedirs(os.path.dirname(MODEL_PATH), exist_ok=True)
 joblib.dump(model, MODEL_PATH)
 print(f"✅ Model zapisany jako {MODEL_PATH}")
+
