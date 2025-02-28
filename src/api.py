@@ -3,7 +3,7 @@ import pandas as pd
 import os
 from fastapi import FastAPI
 from pydantic import BaseModel
-from data_preparation import preprocess_data
+from src.data_preparation import preprocess_data
 
 # Ścieżka do zapisanego modelu
 MODEL_PATH = os.path.join(os.path.dirname(__file__), "../models/random_forest.pkl")
