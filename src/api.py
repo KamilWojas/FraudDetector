@@ -1,12 +1,13 @@
 import joblib
 import pandas as pd
 import os
+import sqlite3
 from fastapi import FastAPI
 from pydantic import BaseModel
-from src.data_preparation import preprocess_data
+from data_preparation import preprocess_data
 
-# Ścieżka do zapisanego modelu
-MODEL_PATH = os.path.join(os.path.dirname(__file__), "../models/random_forest.pkl")
+# Ścieżka do modelu
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "../models/xgboost_model.pkl")
 
 # Wczytanie modelu
 model = joblib.load(MODEL_PATH)
@@ -14,8 +15,25 @@ model = joblib.load(MODEL_PATH)
 # Inicjalizacja FastAPI
 app = FastAPI()
 
+# Połączenie z bazą SQLite
+DB_PATH = os.path.join(os.path.dirname(__file__), "../fraud_logs.db")
+conn = sqlite3.connect(DB_PATH)
+cursor = conn.cursor()
 
-# Definicja formatu danych wejściowych
+# Tworzenie tabeli logów (jeśli nie istnieje)
+cursor.execute("""
+    CREATE TABLE IF NOT EXISTS fraud_logs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        time FLOAT,
+        amount FLOAT,
+        prediction INTEGER,
+        probability FLOAT
+    )
+""")
+conn.commit()
+
+
+# Klasa do obsługi danych wejściowych
 class Transaction(BaseModel):
     Time: float
     V1: float
@@ -61,8 +79,14 @@ def predict(transaction: Transaction):
     prediction = model.predict(data)[0]  # Predykcja modelu
     probability = model.predict_proba(data)[0][1]  # Prawdopodobieństwo fraudu
 
+    # Logowanie transakcji do bazy
+    cursor.execute(
+        "INSERT INTO fraud_logs (time, amount, prediction, probability) VALUES (?, ?, ?, ?)",
+        (transaction.Time, transaction.Amount, int(prediction), float(probability))
+    )
+    conn.commit()
+
     return {
         "fraud_prediction": int(prediction),
         "fraud_probability": float(probability)
     }
-
